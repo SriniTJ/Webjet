@@ -1,0 +1,109 @@
+﻿@using WebJetMoviesApp.Models;
+
+@{
+    ViewBag.Title = "ViewMovieDetails";
+    MovieDetails movieDetails = ViewBag.MovieDetails;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>View Movie Details</h1>
+<br />
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            
+        </thead>
+
+        <tbody>
+            @if (movieDetails != null)
+            {
+                <tr>
+                    <td width="20%"><strong>@Consts.Title</strong></td>
+                    <td>@movieDetails.Title</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Year</strong></td>
+                    <td>@movieDetails.Year</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Rated</strong></td>
+                    <td>@movieDetails.Rated</td>
+                </tr>
+
+                <tr>
+                    <td><strong>@Consts.Released</strong></td>
+                    <td>@movieDetails.Released</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Runtime</strong></td>
+                    <td>@movieDetails.Runtime</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Genre</strong></td>
+                    <td>@movieDetails.Genre</td>
+                </tr>
+
+                <tr>
+                    <td><strong>@Consts.Director</strong></td>
+                    <td>@movieDetails.Director</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Writer</td>
+                    <td>@movieDetails.Writer</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Actors</td>
+                    <td>@movieDetails.Actors</td>
+                </tr>
+
+                <tr>
+                    <td><strong>@Consts.Plot</strong></td>
+                    <td>@movieDetails.Plot</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Language</strong></td>
+                    <td>@movieDetails.Language</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Country</strong></td>
+                    <td>@movieDetails.Country</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Awards</strong></td>
+                    <td>@movieDetails.Awards</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Poster</strong></td>
+                    <td><a href="@movieDetails.Poster">@movieDetails.Poster</a></td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Metascore</strong></td>
+                    <td>@movieDetails.Metascore</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Rating</strong></td>
+                    <td>@movieDetails.Rating</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Votes</strong></td>
+                    <td>@movieDetails.Votes</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.ID</strong></td>
+                    <td>@movieDetails.ID</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Type</strong></td>
+                    <td>@movieDetails.Type</td>
+                </tr>
+                <tr>
+                    <td><strong>@Consts.Price</strong></td>
+                    <td>@movieDetails.Price</td>
+                </tr>
+                
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("Back to movie list", "MoviesList", "Movies", new { @class = "btn btn-primary" });
+</div>
+

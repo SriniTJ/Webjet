@@ -1,0 +1,146 @@
+﻿@using WebJetMoviesApp.Models;
+
+@{
+    ViewBag.Title = "MoviesList";
+    List<Movie> cinemaWorldMovies = ViewBag.MovieListCinemaWorld;
+    List<Movie> filmWorldMovies = ViewBag.MovieListFilmWorld;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+}
+<h1>Watch Movies Online</h1>
+<div style="width:100%; border:1px #ccc solid; margin-top:20px; padding-bottom:20px; padding-left:20px">
+  
+    <h2>Get cheapest movie information</h2>
+  @Html.DropDownList("CompleteListOfMovies", (IEnumerable<SelectListItem>)ViewBag.CompleteListOfMovies, new { @style = "border:1px #ccc solid; border-radius:4px; height:35px;" })
+    
+    <input type="button" value="Get Cheapest" id="btnGetCheapest" class="btn btn-primary" />
+    <span id="spnCheapSourceInfo"></span>
+    
+</div>
+
+
+<script type="text/javascript">
+
+
+
+        $(function () {
+            $('#btnGetCheapest').click(function (e) {
+
+                $.ajax({
+                    //base address/controller/Action
+                    url: '/Movies/GetCheapestSourceInformation',
+                    type: 'GET',
+                    data: {
+                        //Passing Input parameter
+                        movieId: $('#CompleteListOfMovies').val()
+                    },
+                    success: function (result) {
+                        $("#spnCheapSourceInfo").html(result);
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                return false;
+            });
+        });
+
+
+
+
+</script>
+
+<br />
+<h3>Cinema world movies list</h3>
+
+
+
+    <div>
+        <table class="table table-bordered  table-striped">
+            <thead>
+                <tr>
+                    <th>@Consts.Title</th>
+                    <td>&nbsp;</td>
+                    <th>@Consts.Year</th>
+                    <td>&nbsp;</td>
+                    <th>@Consts.ID</th>
+                    <td>&nbsp;</td>
+                    <th>@Consts.Type</th>
+                    <td>&nbsp;</td>
+                    @*<th>Poster</th>*@
+                    <th>@Consts.ViewDetails</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            @if (cinemaWorldMovies != null)
+            {
+                foreach (Movie movie in cinemaWorldMovies)
+                {
+                        <tr>
+                            <td>@movie.Title</td>
+                            <td>&nbsp;</td>
+                            <td>@movie.Year</td>
+                            <td>&nbsp;</td>
+                            <td>@movie.ID</td>
+                            <td>&nbsp;</td>
+                            <td>@movie.Type</td>
+                            <td>&nbsp;</td>
+                            @*<td>@movie.Poster</td>*@
+                            @*<td><a href="/Movies/ViewMovie/@movie.ID" title="View"></a></td>*@
+                            @*<td>@Html.ActionLink("View details", "ViewMovieDetails", new { class="btn btn-default", movieId = movie.ID, movieSource = "CW" })</td>*@
+                            <td><a class="glyphicon glyphicon-eye-opent"></a>@Html.ActionLink("View details", "ViewMovieDetails", "Movies", new { movieId = movie.ID, movieSource = "CW" }, new { @class = "btn btn - default" })</td>
+                        </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+<br /><hr /><br />
+    <h3>Film world movies list</h3>
+
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <td>&nbsp;</td>
+                    <th>Year</th>
+                    <td>&nbsp;</td>
+                    <th>ID</th>
+                    <td>&nbsp;</td>
+                    <th>Type</th>
+                    <td>&nbsp;</td>
+                    @*<th>Poster</th>*@
+                    <th>View Details</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (filmWorldMovies != null)
+            {
+                foreach (Movie movie in filmWorldMovies)
+                {
+                        <tr>
+                            <td>@movie.Title</td>
+                            <td>&nbsp;</td>
+                            <td>@movie.Year</td>
+                            <td>&nbsp;</td>
+                            <td>@movie.ID</td>
+                            <td>&nbsp;</td>
+                            <td>@movie.Type</td>
+                            <td>&nbsp;</td>
+                            @*<td>@movie.Poster</td>*@
+                            @*<td><a href="/Movies/ViewMovie/@movie.ID" title="View"></a></td>*@
+                           <td><a class="glyphicon glyphicon-eye-opent"></a>@Html.ActionLink("View details","ViewMovieDetails", new {movieId = movie.ID, movieSource = "FW" }, new { @class = "btn btn - defaul" })</td>
+                            
+                        </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+
+   
+
